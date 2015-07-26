@@ -1,0 +1,2 @@
+%{"beam_analyzer": {:hex, :beam_analyzer, "0.0.3"},
+  "plug": {:hex, :plug, "0.13.0"}}

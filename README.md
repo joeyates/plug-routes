@@ -34,4 +34,4 @@ the supplied module.
   * The first parameter to the function, if it is a string is taken to be the HTTP
     verb that the route responds to.
   * The second parameter to the function is the path indicator.
-  * Guard clauses are also checked for `via:` - the verb indicator.
+  * Guard clauses are also checked for `via:` - the HTTP verb indicator.

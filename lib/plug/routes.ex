@@ -79,7 +79,7 @@ defmodule Plug.Routes do
   end
 
   def analyze_routes(module) do
-    case BeamAnalyzer.function(module, :do_match) do
+    case BeamAnalyzer.function(module, :do_match, 3) do
       {:ok, do_match_clauses} ->
         {:ok, do_analyze_routes(do_match_clauses)}
       {:error, :not_found} ->

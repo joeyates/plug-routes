@@ -1,4 +1,4 @@
-defmodule Routes.Mixfile do
+defmodule Plug.Routes.Mixfile do
   use Mix.Project
 
   def project do

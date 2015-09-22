@@ -61,7 +61,7 @@ defmodule Plug.Routes do
     do_analyze_route(verb, path_cons, guards)
   end
 
-  # Plug 0.13.1
+  # Plug >= 0.13.1
   defp analyze_route({:clause, _line1, [_conn, verb, path_cons, _], guards, _body}) do
     do_analyze_route(verb, path_cons, guards)
   end

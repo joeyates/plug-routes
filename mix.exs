@@ -17,7 +17,7 @@ defmodule Plug.Routes.Mixfile do
   defp deps do
     [
       {:beam_analyzer, ">= 0.0.3"},
-      {:plug, ">= 0.13.0 and <= 0.13.1"},
+      {:plug, ">= 0.13.0 or ~> 1.0.0"},
     ]
   end
 end

@@ -14,6 +14,7 @@ defmodule Plug.RoutesTest do
       [path: ["get"], verbs: ["GET"]],
       [path: ["path", "elements"], verbs: ["GET"]],
       [path: ["with_variable", :bar], verbs: ["GET"]],
+      [path: ["with", "*glob"], verbs: ["*"]],
     ]
     assert routes == expected
   end
@@ -26,7 +27,8 @@ defmodule Plug.RoutesTest do
       "POST, GET /match_get_or_post",
       "GET /get",
       "GET /path/elements",
-      "GET /with_variable/:bar"
+      "GET /with_variable/:bar",
+      "* /with/*glob"
     ]
     assert routes == expected
   end

@@ -34,36 +34,40 @@ defmodule Plug.Routes do
     String.to_atom(element)
   end
 
-  defp path_elements_from_cons({:cons, _, {:bin, _, [bin]}, {:nil, _}}) do
+  defp path_from_path_data({:var, _, name}) do
+    ["*" <> to_string(variable_path_element_from_var(name))]
+  end
+
+  defp path_from_path_data({:cons, _, {:bin, _, [bin]}, {:nil, _}}) do
     [string_from_bin(bin)]
   end
 
-  defp path_elements_from_cons({:cons, _, {:bin, _, [bin]}, cons}) do
-    [string_from_bin(bin) | path_elements_from_cons(cons)]
+  defp path_from_path_data({:cons, _, {:bin, _, [bin]}, cons}) do
+    [string_from_bin(bin) | path_from_path_data(cons)]
   end
 
-  defp path_elements_from_cons({:cons, _, {:var, _, name}, {nil, _}}) do
+  defp path_from_path_data({:cons, _, {:var, _, name}, {nil, _}}) do
     [variable_path_element_from_var(name)]
   end
 
-  defp path_elements_from_cons({:cons, _, {:var, _, name}, cons}) do
-    [variable_path_element_from_var(name) | path_elements_from_cons(cons)]
+  defp path_from_path_data({:cons, _, {:var, _, name}, cons}) do
+    [variable_path_element_from_var(name) | path_from_path_data(cons)]
   end
 
-  defp do_analyze_route(verb, path_cons, guards) do
+  defp do_analyze_route(verb, path_data, guards) do
     verbs = verbs_from_param(verb) || verbs_from_guards(guards)
-    path = path_elements_from_cons(path_cons)
+    path = path_from_path_data(path_data)
     [path: path, verbs: verbs]
   end
 
   # Plug 0.13.0
-  defp analyze_route({:clause, _line1, [verb, path_cons, _], guards, _body}) do
-    do_analyze_route(verb, path_cons, guards)
+  defp analyze_route({:clause, _line1, [verb, path_data, _], guards, _body}) do
+    do_analyze_route(verb, path_data, guards)
   end
 
   # Plug >= 0.13.1
-  defp analyze_route({:clause, _line1, [_conn, verb, path_cons, _], guards, _body}) do
-    do_analyze_route(verb, path_cons, guards)
+  defp analyze_route({:clause, _line1, [_conn, verb, path_data, _], guards, _body}) do
+    do_analyze_route(verb, path_data, guards)
   end
 
   defp do_analyze_routes([match | rest]) do

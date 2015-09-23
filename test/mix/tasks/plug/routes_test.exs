@@ -15,6 +15,7 @@ POST, GET  /match_get_or_post
 GET        /get
 GET        /path/elements
 GET        /with_variable/:bar
+*          /with/*glob
 """
 
     result = capture_io(fun)

@@ -1,6 +1,6 @@
 defmodule APlugRouter do
   use Plug.Router
-  
+
   plug :match
 
   match "/any_verb" do
@@ -25,5 +25,9 @@ defmodule APlugRouter do
 
   get "/with_variable/:bar" do
     conn |> resp(200, "bar = #{bar}")
+  end
+
+  match "/with/*glob" do
+    conn |> resp(200, "matched #{glob}")
   end
 end

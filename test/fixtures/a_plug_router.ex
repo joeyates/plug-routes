@@ -19,6 +19,14 @@ defmodule APlugRouter do
     conn |> resp(200, "the response")
   end
 
+  post "/post" do
+    conn |> resp(200, "the response")
+  end
+
+  delete "/delete" do
+    conn |> resp(200, "the response")
+  end
+
   get "/path/elements" do
     conn |> resp(200, "the response")
   end

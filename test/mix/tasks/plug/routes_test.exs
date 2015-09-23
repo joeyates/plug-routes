@@ -13,6 +13,8 @@ Verb       Path
 POST       /match_post
 POST, GET  /match_get_or_post
 GET        /get
+POST       /post
+DELETE     /delete
 GET        /path/elements
 GET        /with_variable/:bar
 *          /with/*glob

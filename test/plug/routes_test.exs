@@ -12,6 +12,8 @@ defmodule Plug.RoutesTest do
       [path: ["match_post"], verbs: ["POST"]],
       [path: ["match_get_or_post"], verbs: ["POST", "GET"]],
       [path: ["get"], verbs: ["GET"]],
+      [path: ["post"], verbs: ["POST"]],
+      [path: ["delete"], verbs: ["DELETE"]],
       [path: ["path", "elements"], verbs: ["GET"]],
       [path: ["with_variable", :bar], verbs: ["GET"]],
       [path: ["with", "*glob"], verbs: ["*"]],
@@ -26,6 +28,8 @@ defmodule Plug.RoutesTest do
       "POST /match_post",
       "POST, GET /match_get_or_post",
       "GET /get",
+      "POST /post",
+      "DELETE /delete",
       "GET /path/elements",
       "GET /with_variable/:bar",
       "* /with/*glob"

@@ -1,15 +1,57 @@
-# Plug.Routes
+# Plug.Routes [![Build Status](https://api.travis-ci.org/joeyates/plug-routes.svg)][Continuous Integration]
+Provides the mix command `mix plug.routes`.
 
-This library implements the command `mix plug.routes`.
+[Source Code]: https://github.com/joeyates/plug-routes "Source code at GitHub"
+[Continuous Integration]: http://travis-ci.org/joeyates/plug-routes "Build status by Travis-CI"
 
-## Usage
+# Add to a project
+
+mix.exs:
+```
+...
+  defp deps do
+    [
+      {:plug_routes, ">= 0.0.2"}
+    ]
+  end
+...
+```
+
+# Usage
 
 When passed the name of a Plug router module, it lists
 all defined routes.
 
-Example:
+## Example
+
+With these routes:
+
+```elixir
+defmodule MyRouter do
+  use Plug.Router
+
+  plug :match
+
+  match "/articles" do
+    conn |> resp(200, "articles")
+  end
+
+  get "/articles/:id" do
+    conn |> resp(200, "an article")
+  end
+
+  match "/articles/:id", via: [:post, :put] do
+    conn |> resp(200, "updated an article")
+  end
+
+  match "*anything" do
+    conn |> resp(200, "articles")
+  end
+end
+```
+
 ```sh
-$ mix plug.routes MyPlug
+$ mix plug.routes MyRouter
 Verb       Path
 GET        /articles
 GET        /articles/:id
@@ -19,7 +61,7 @@ POST, PUT  /articles/:id
 
 Note that `*` indicates a route that accepts any HTTP verb.
 
-## Implementation
+# Implementation
 
 Plug routes are macro-defined private methods.
 
